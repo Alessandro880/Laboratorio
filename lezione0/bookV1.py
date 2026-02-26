@@ -28,7 +28,34 @@ while(letto != "quit"):
 
     libro = Book(titolo, autore, anno, tipo)
     biblioteca.aggiungi_libro(libro)
+    while True:
+        letto = input("\nVuoi inserire un altro libro? digita 'add' \nVuoi visualizzare tutti i libri? digita 'vis' \nRicerca libro per autore ? digita 'ricA'\nRicerca per titolo? digita 'ricT'\n\n(digita 'quit' per uscire): ")
+        if(letto == "add" or letto=="quit") :
+            break
+        elif(letto=="vis"):
+            print("\n")
+            biblioteca.mostra_libri()
+            print("\n")
+        elif(letto=="ricA"):
+            autore_ricerca = input("Inserisci l'autore da cercare: ")
+            print("\n")
+            trovato=0
+            for libro in biblioteca.libri:
+                if libro.autore == autore_ricerca:
+                    print(libro.stampa())
+                    trovato=1
+            if(trovato==0):
+                print("Autore non trovato!!\n")
+            print("\n")
+        elif(letto=="ricT"):
+            ricerca_titolo = input("Inserisci titolo libro : ")
+            print("\n")
+            trovato=0
+            for l in biblioteca.libri : 
+                if(l.titolo == ricerca_titolo):
+                    print(l.stampa())
+                    trovato=1
+            if(trovato==0):
+                print("Titolo non trovato!!\n")
+            print("\n")
 
-    letto = input("Vuoi inserire un altro libro? (digita 'quit' per uscire): ")
-
-biblioteca.mostra_libri()
