@@ -2,20 +2,17 @@ from book import Book
 
 class LibraryFast:
     def __init__(self):
-        self.libri = []
         self.libri_autore = {}
         self.libri_titolo = {}
     
     def aggiungi_libro(self, libro):
-        self.libri.append(libro)
-
         if libro.autore not in self.libri_autore:
             self.libri_autore[libro.autore] = []
         self.libri_autore[libro.autore].append(libro)
 
         self.libri_titolo[libro.titolo] = libro
     def mostra_libri(self):
-        for l in self.libri:
+        for l in self.libri_titolo.values():
             print(l.stampa())
     
     def cerca_autore(self, autore_ricerca):

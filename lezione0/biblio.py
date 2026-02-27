@@ -6,7 +6,7 @@ import time
 #biblioteca = Library()
 biblioteca = LibraryFast()
 
-for i in range(10000000):
+for i in range(10000):
     libro = Book(f"{i}", f"{i}", 2000+i, f"{i%10}")
     biblioteca.aggiungi_libro(libro)
 
