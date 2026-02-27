@@ -1,8 +1,10 @@
 from book import Book
 from library import Library
+from libraryFast import LibraryFast
 
 
-biblioteca = Library()
+#biblioteca = Library()
+biblioteca = LibraryFast()
 
 for i in range(100000):
     libro = Book(f"{i}", f"{i}", 2000+i, f"{i%10}")
