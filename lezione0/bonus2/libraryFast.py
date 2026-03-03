@@ -1,5 +1,3 @@
-from book import Book
-
 class LibraryFast:
     def __init__(self):
         self.libri_autore = {}
@@ -12,8 +10,9 @@ class LibraryFast:
 
         self.libri_titolo[libro.titolo] = libro
     def mostra_libri(self):
-        for l in self.libri_titolo.values():
-            print(l.stampa())
+        for l in self.libri_autore.values():
+            for tit in l :
+                print(tit.stampa())
     
     def cerca_autore(self, autore_ricerca):
         if autore_ricerca in self.libri_autore:
@@ -28,6 +27,7 @@ class LibraryFast:
             print("Titolo non trovato!!\n")
 
     def rimuovi_libro(self, titolo):
-        for tit in self.libri_autore:
-            if(tit == titolo):  self.libri_autore.remove(titolo)
+        for tit in self.libri_autore.values():
+            for n in tit:
+                if(n.titolo==titolo): tit.remove(n)
         self.libri_titolo.pop(titolo)
