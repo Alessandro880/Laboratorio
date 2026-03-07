@@ -7,5 +7,5 @@ class Store:
 
     def displayInventory(self):
         print(f"------ Store Inventory -----")
-        print(f"Cassa : {self.money}")
+        print(f" Cassa : {self.money}\n")
         self.inventory.stampaStoreInventory()

@@ -1,7 +1,7 @@
 from .normalItem import NormalItem
 
 class ForeignItem(NormalItem):
-    def __init__(self, id, price, name, description, country):
+    def __init__(self, id, price:float, name, description, country):
         super().__init__(id, price, name, description)
         self.country = country
 

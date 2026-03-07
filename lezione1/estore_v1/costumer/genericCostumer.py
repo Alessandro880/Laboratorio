@@ -6,3 +6,7 @@ class GenericCostumer :
         return f"(id : {self.id} )"
     def saldoAttuale(self)->int:
         return self.__saldo
+    def decrementaSaldo(self, amount:float):
+        self.__saldo -= amount
+    def incrementaSaldo(self, amount:float):
+        self.__saldo += amount
