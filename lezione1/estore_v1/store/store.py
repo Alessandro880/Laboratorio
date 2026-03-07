@@ -1,10 +1,11 @@
 from store_inventory import StoreInventory
 
 class Store:
-    def __init__(self, inventory: StoreInventory, name: str):
+    def __init__(self, inventory: StoreInventory, money: int):
         self.inventory = inventory
-        self.name = name
+        self.money = money
 
     def displayInventory(self):
-        print(f"------ Store Inventory di {self.name}-----")
+        print(f"------ Store Inventory -----")
+        print(f"Cassa : {self.money}")
         self.inventory.stampaStoreInventory()

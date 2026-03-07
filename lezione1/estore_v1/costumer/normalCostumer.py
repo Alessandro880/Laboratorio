@@ -1,7 +1,7 @@
-from .genericConsumer import GenericConsumer
-class NormalConsumer(GenericConsumer):
-    def __init__(self,id, nome, cognome, email):
-        super().__init__(id)
+from .genericCostumer import GenericCostumer
+class NormalCostumer(GenericCostumer):
+    def __init__(self,id, saldo, nome, cognome, email):
+        super().__init__(id, saldo)
         self.nome = nome
         self.cognome = cognome
         self.email = email
