@@ -1,0 +1,5 @@
+ale,ale,0
+pluto,ciao,111
+cecio,pippo,4001,Cesare,Lola,cecio@gmail.com
+pippi,pippo,200,Alessandro,Angeletti,alex@gmail.com,9
+Felix,felix,80
