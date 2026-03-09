@@ -4,7 +4,8 @@ class GenericCostumer :
         self.__saldo=saldo
         self.__password = password
     def __str__(self):
-        return f"(username : {self.username} )"
+        s = self.username + "," + self.__password + "," + str(self.__saldo)
+        return s
     def saldoAttuale(self)->int:
         return self.__saldo
     def decrementaSaldo(self, amount:float):

@@ -7,7 +7,7 @@ class PromotionalCostumer(NormalCostumer):
         self.discount = discount
 
     def __str__(self):
-        return super().__str__() + f" (discount : {self.discount} %)"
+        return super().__str__() + f",{self.discount}"
     
     def prezzo_scontato(self, prezzo):
         return prezzo -((prezzo*self.discount)/100)

@@ -63,7 +63,9 @@ while(letto != '3'):
                         userLogin = nome
                         # Menu dello store
                         while(letto!= '6'):
-                            print(f"Benvenuto {userLogin}\n-------MENU-------\n 1. Display Store Inventory\n 2. Buy Item by ID\n 3. Find Item by ID\n 4. Visualizza Saldo\n 5. Ricarica saldo \n6. Exit\n")
+                            print(f"""Benvenuto {userLogin}\n-------MENU-------\n 1. Display Store Inventory\n 2. Buy Item by ID\n 3. Find Item by ID
+                                  \n 4. Visualizza Saldo\n 5. Ricarica saldo \n6. Pass to normalCostumer\n
+                                  7. Exit\n""")
                             letto = input("---> ")
 
                             if(letto== '1'):
@@ -87,7 +89,27 @@ while(letto != '3'):
                                 os.system('clear')
                                 ricarica = input("Insert the amount to recharge: ")
                                 users[userLogin].incrementaSaldo(float(ricarica))
+                                with open("users.txt", "w", encoding='utf-8') as f:
+                                    for user in users.values():
+                                        f.write(user.__str__() + "\n")
                                 print("\n-> Your new balance is: ", users[userLogin].saldoAttuale(), "\n") 
+                            
+                            elif(letto == '6'):
+                                os.system('clear')
+                                name = input("Insert your name: ")
+                                surname = input("Insert your surname: ")                                
+                                email = input("Insert your email: ")     
+                                username = users[userLogin].username
+                                password = users[userLogin]._GenericCostumer__password
+                                saldo = str(users[userLogin]._GenericCostumer__saldo)
+
+                                del users[userLogin]
+                                u = NormalCostumer(username, password,saldo, name, surname, email)
+                                users[username] = u
+                                with open("users.txt", "w", encoding='utf-8') as f:
+                                    for user in users.values():
+                                        f.write(user.__str__() + "\n")
+                                print("\n-> You are now a normal costumer!\n")
                         userLogin = ""
                         os.system('clear')
                         break    

@@ -6,4 +6,5 @@ class NormalCostumer(GenericCostumer):
         self.cognome = cognome
         self.email = email
     def __str__(self):
-        return f"(username : {self.username} , nome : {self.nome} , cognome : {self.cognome} , email : {self.email} )"
+        s = super().__str__()
+        return s+f",{self.nome},{self.cognome},{self.email}"
