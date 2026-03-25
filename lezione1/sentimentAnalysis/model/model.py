@@ -1,4 +1,4 @@
-
+import csv
 class Model():
     def __init__(self, name):
         self.name = name
@@ -8,8 +8,10 @@ class Model():
 
     def inserisciRighe(self, file):
         with open(file, "r", encoding="utf-8") as f:
-            for line in f : 
-                self.righe.append(line.split("\t"))
+            lettore = csv.reader(f)
+            for line in lettore: 
+                self.righe.append(line)
+                
 
     def studia():
         print("Studia la prima metà!\n")
