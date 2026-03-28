@@ -1,9 +1,9 @@
 from store_inventory import StoreInventory
+from pydantic import BaseModel
 
-class Store:
-    def __init__(self, inventory: StoreInventory, money: int):
-        self.inventory = inventory
-        self.money = money
+class Store(BaseModel):
+    inventory:StoreInventory
+    money:float
 
     def displayInventory(self):
         print(f"------ Store Inventory -----")

@@ -4,6 +4,7 @@ from store_inventory import StoreInventory
 from store import Store
 from ui import *
 import os
+from rest import server
 
 c1 = GenericCostumer("Generic Consumer")
 c2 = NormalCostumer("Normal Consumer",200.21, "Mario", "Rossi", "anjdcejcnje@gmail.com")

@@ -1,12 +1,14 @@
 from storeItem import *
 from ui import *
-class StoreInventory :
-    def __init__(self):
-        self.item = {
-            "genericItem" : [0,[]],
-            "normalItem" : [0,[]],
-            "foreignItem" : [0,[]]
-        }
+from pydantic import BaseModel
+from typing import Dict, List
+
+class StoreInventory(BaseModel) :
+    item:Dict[str, List] = {
+        "genericItem" : [0,[]],
+        "normalItem" : [0,[]],
+        "foreignItem" : [0,[]]
+    }
     def addItem(self, item):
         if isinstance(item, ForeignItem):
             self.item["foreignItem"][0] += 1
@@ -35,7 +37,7 @@ class StoreInventory :
                 self.item["genericItem"][1].remove(item)
                 print("\n-> Item removed: ", item, "\n")
 
-
+   
     def stampaStoreInventory(self):
         print("Generic Item: ", self.item["genericItem"][0])
         for item in self.item["genericItem"][1]:
