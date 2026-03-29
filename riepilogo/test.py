@@ -1,4 +1,8 @@
 
+
+#  source .venv/bin/activate
+# deactivate
+
 #File
 """
 with open('file.txt', 'r', encoding='utf-8') as f:
@@ -431,3 +435,227 @@ plt.title("Example Plot")
 plt.show()
 '''
 
+
+#File JSON
+
+# import json
+
+# person = {
+#     "name" : "Alessandro",
+#     "age" : 22,
+#     "city" : "Roma",
+#     "languages" : ["english","italiano"]
+# }
+
+# with open("file.json", "w", encoding="utf-8") as f:
+#     json.dump(person, f, indent=4)
+
+# with open("file.json", 'r', encoding='utf-8') as f:
+#     data = json.load(f)
+#     print(data)
+
+
+
+
+#     Pydantic
+
+# è una libreewria per modellare dati con type chcking statico
+# permette la realizzazione di classi con type checking statico
+# ben integrato con FastApy
+
+# ---- BaseModel -----
+#from pydantic import BaseModel
+
+# class User(BaseModel):
+#     id:int
+#     name:str
+
+# user = User(id=123, name="Alex")
+# print(user)
+# try:
+#     invalid_user = User(id="123", name=111)
+# except Exception as e:
+#     print(e)
+
+# ---- Tipi di campi ------
+#from typing import Optional
+
+# class User(BaseModel):
+#     name:str            #obbligatorio
+#     age:int             #obbligatorio
+#     email:str='nessuna' #obbligatorio
+#     bio:Optional[str] = None #opzionale
+#     active:bool = True       #default true
+
+
+# ----- Nesting dei modelli ------
+# from typing import List
+
+# class Address(BaseModel):
+#     street:str
+#     city:str
+#     zipcode:str
+
+# class Person(BaseModel):
+#     name:str
+#     age:int
+#     address:Address
+
+# class Company(BaseModel):
+#     name:str
+#     employees:List[Person]
+
+# address = Address(street='Via del Fossatello', city="Poli", zipcode="00010")
+# person = Person(name="Ale", age=22, address=address)
+# company = Company(name="NameC", employees=[person])
+
+# print(company)
+
+
+# ------ Validazioni ulteriori --------
+
+# from pydantic import BaseModel, Field, ValidationError, field_validator
+# from typing import Literal
+
+# class Address(BaseModel):
+#     street:str
+#     city: Literal["New York","Los Angeles","Chicago", "Miami"]
+#     zipcode: str=Field(..., pattern=r'^\d+$')  #only digits
+
+#     @field_validator("zipcode")
+#     @classmethod
+#     def check_zipcode_lenght(cls, value:str) ->str:
+#         if len(value) != 5:
+#             raise ValueError("Zipcode must be exactly 5 digits long")
+#         return value
+    
+# try:
+#     address = Address(street="123 main",city="Miami", zipcode="123")
+# except ValidationError as e:
+#     print(e)
+
+
+# FastApi
+
+
+# from fastapi import FastAPI, HTTPException
+# from pydantic import BaseModel
+# from typing import Optional
+
+# app = FastAPI()
+
+# class Item(BaseModel):
+#     name:str
+#     price:float
+#     description:Optional[str]=None
+
+# items_db = {
+#     1: Item(name='Laptop', price=999.99),
+#     2: Item(name='Smartphone', price=499.99)
+# }
+
+# @app.get("/items/{item_id}")
+# def read_item(item_id:int) ->Item:
+#     if item_id in items_db:
+#         return items_db[item_id]
+#     raise HTTPException(status_code=404, detail="Item not found!!")
+
+
+
+# from fastapi import FastAPI, HTTPException
+# from pydantic import BaseModel
+# from typing import List
+
+# app = FastAPI()
+
+# class Item(BaseModel):
+#     name:str
+#     price:float
+
+# class ItemCreationResponse(BaseModel):
+#     message:str
+#     item:Item
+
+# items : List[Item] = []
+
+# @app.post("/add_item/")
+# def create_item(item:Item) -> ItemCreationResponse:
+#     if any(existing_item.name == item.name for existing_item in items):
+#         raise HTTPException(status_code=400, detail="Nome gia presente")
+#     items.append(item)
+#     return ItemCreationResponse(message="Item Aggiunto", item=item)
+
+# @app.get("/list_all_items/")
+# def get_itmes() -> List[Item]:
+#     return items
+
+
+
+# ------ Cors --------
+# from  fastapi import FastAPI
+# from fastapi.middleware.cors import CORSMiddleware
+
+# app = FastAPI()
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# @app.get("/")
+# def read_root():
+#     return("message: CORS abilitato correttamente")
+
+
+# ------ Modulo Requests --------
+
+# import requests
+# #url = "https://jsonplaceholder.typicode.com/posts/1"
+# url = "http://127.0.0.1:8000/posts/2"
+
+
+# response = requests.get(url)
+
+# if response.status_code == 200:
+#     content_type = response.headers.get("Content-Type", "")
+
+#     if "application/json" in content_type:
+#         try:
+#             data = response.json()
+#             if "errore" in  data:
+#                 print(data["errore"])
+#             else:
+#                 print("titolo: ", data.get("title"))
+#             #print("contenuto: ", data.get("body"))
+#         except ValueError:
+#             print("Errore: il file non è JSON valido")
+#     else:
+#         print("Errore: la risposta non è JSON")
+#         print("Content-Type: ", content_type)
+    
+# else :
+#     print("Errore HTTP: ", response.status_code)
+
+
+# import requests
+
+# #url = "https://jsonplaceholder.typicode.com/posts"
+# url = "http://127.0.0.1:8000/posts"
+
+
+# payload = {
+#         "userID" : 2,
+#         "title" : "title 1",
+#         "body" : "body 1"
+# }
+
+# response = requests.post(url, json=payload)
+
+# if response.status_code == 200:
+#     data = response.json()
+#     print(data)
+# else:
+#     print("Errore: ", response.status_code)

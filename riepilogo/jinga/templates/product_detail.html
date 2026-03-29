@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ prodotto['nome'] if prodotto else "Prodotto non trovato"}}</title>
+    </head>
+
+    <body>
+        {% if prodotto %}
+            <h1>{{ prodotto['nome'] }}</h1>
+            <p><strong>Prezzo:</strong> {{ prodotto['prezzo'] }} €</p>
+            <p><strong>Descrizione:</strong> {{ prodotto['descrizione'] }}</p>
+        {% else %}
+            <h1>Prodotto non trovato</h1>
+            <p>Il prodotto che stai cercando non è disponibile.</p>
+        {% endif %}
+        <a href="/">Torna alla home</a>
+    </body>
+</html>

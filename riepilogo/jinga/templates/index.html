@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Store - Home</title>
+</head>
+
+<body>
+    <h1>Benvenuto nel nostro E-Store!</h1>
+    <p>Scopri i nostri prodotti e offerte speciali.</p>
+
+    <ul>
+        {% for prodotto in prodotti %}
+            <li>
+                <a href="/prodotto/{{ prodotto['id'] }}">{{ prodotto['nome'] }}</a>
+            </li>
+        {% else %}
+            <li>Nessun prodotto disponibile al momento.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
